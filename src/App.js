@@ -1,23 +1,45 @@
+/* eslint-disable */
 import React from 'react';
 import './App.scss';
-import {
-  useEffect,
-  useState
-} from 'react';
-import axios from 'axios';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import {   doc, setDoc } from 'firebase/firestore';
+// import { db } from './firebase';
 
 function App() {
-  const [rooms, SetRooms] = useState([]);
+  //Получение массива комнат
+  // const [rooms, SetRooms] = useState([]);
 
-  useEffect(() => {
-    axios("http://localhost:3001/posts")
-      .then(resp => SetRooms(resp.data));
+  //Запись массива комнат в Firebase
+  // const createAccount =  () => {
+  //    rooms.map((el) => {
+  //    setDoc(doc(db, "Rooms", el.id), {...el})      
 
-  }, [])
+  //   })
+
+  // }
+
+
+  //Запрос данных из localhost
+  // useEffect(() => {
+  //   axios("http://localhost:3001/posts")
+  //     .then(resp => {
+  //       SetRooms(resp.data[0].Rooms)
+  //     }
+  //     )
+
+  // }, []);
+
 
   return (
     <div className="App">
-      {console.log(rooms)}
+
+      {/*Вызов функции записи данных в firebase
+       <button onClick={()=>{
+        createAccount()
+      }}>Получить данные</button>
+      
+      {console.log(rooms)} */}
     </div>
   );
 }
