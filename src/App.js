@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React from 'react';
 import './App.scss';
-import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query } from 'firebase/firestore';
-import { db } from './firebase';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getRooms } from './api';
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
 
@@ -33,33 +33,12 @@ const [rooms, SetRooms] = useState([]);
   }, []); */}
 
   // </>
-  const [rooms, setRooms] = useState([]);
-  const [users, setUsers] = useState([]);
+  
+ 
+  const dispatch = useDispatch();
   useEffect(() => {
-    const q = query(collection(db, "Rooms"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let roomsArr = [];
-      querySnapshot.forEach((doc) => {
-        roomsArr.push({ ...doc.data(), id: doc.id })
-      })
-      setRooms(roomsArr);
-
-    })
-    return () => unsubscribe
+    dispatch(getRooms())
   }, []);
-  useEffect(() => {
-    const q = query(collection(db, "Accounts"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      let usersArr = [];
-      querySnapshot.forEach((doc) => {
-        usersArr.push({ ...doc.data(), id: doc.id })
-      })
-      setUsers(usersArr);
-
-    })
-    return () => unsubscribe
-  }, []);
-
   return (
     <div className="App">
 
@@ -69,8 +48,6 @@ const [rooms, SetRooms] = useState([]);
       }}>Получить данные</button>
       
       {console.log(rooms)} */}
-      {console.log(rooms)}
-      {console.log(users)}
     </div>
   );
 }
