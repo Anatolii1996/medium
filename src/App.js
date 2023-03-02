@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
+import LoginPage from './pages/LoginPage';
 
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
@@ -83,6 +84,8 @@ const dispatch = useDispatch();
       }}>Получить данные</button>*/}
       
       {/* {console.log(rooms)}  */}
+
+      <LoginPage/>
     </div>
   );
 }

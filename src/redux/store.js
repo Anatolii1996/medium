@@ -17,6 +17,7 @@ const store =  createStore(
 
 // const store = configureStore({
 //     reducer: rootReducer,
+// middleware: [sagaMiddleware]
 // });
 
 export default store;
