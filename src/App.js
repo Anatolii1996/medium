@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './App.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getRooms, getUsers } from './redux/action/ActionCreator';
+import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
 
