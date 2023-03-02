@@ -1,9 +1,11 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getRooms } from './api';
+import { getRooms } from './redux/action/roomsAction';
+import {  collection,  query, onSnapshot } from 'firebase/firestore';
+import { db } from './firebase';
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
 
@@ -33,21 +35,35 @@ const [rooms, SetRooms] = useState([]);
   }, []); */}
 
   // </>
-  
- 
-  const dispatch = useDispatch();
+const [rooms, setRooms]=useState([])
+const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getRooms())
+    const q = query(collection(db, "Rooms"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let roomsArr = [];
+      querySnapshot.forEach((doc) => {
+        roomsArr.push({ ...doc.data(), id: doc.id })
+      })
+      setRooms(roomsArr);
+    })
+    
+    return () => unsubscribe()
   }, []);
+ 
+  
+  useEffect(() => {
+    dispatch(getRooms(rooms))
+  }, [rooms]);
   return (
     <div className="App">
 
       {/*Вызов функции записи данных в firebase
        <button onClick={()=>{
         createAccount()
-      }}>Получить данные</button>
+      }}>Получить данные</button>*/}
       
-      {console.log(rooms)} */}
+      {console.log(rooms)} 
     </div>
   );
 }
