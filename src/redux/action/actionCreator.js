@@ -1,4 +1,5 @@
-// import { SET_ROOMS } from "../constants";
-// import { createAction } from "@reduxjs/toolkit";
+import { GET_ROOMS, GET_USERS } from "../constants";
 
-// export const setRoomsData = createAction(SET_ROOMS)
+export const getRooms = (roomsData) => ({ type: GET_ROOMS, payload: roomsData });
+export const getUsers = (userssData) => ({ type: GET_USERS, payload: userssData });
+

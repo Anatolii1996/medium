@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import './App.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getRooms } from './redux/action/roomsAction';
-import {  collection,  query, onSnapshot } from 'firebase/firestore';
+import { getRooms, getUsers } from './redux/action/ActionCreator';
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
+
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
 
@@ -36,6 +37,7 @@ const [rooms, SetRooms] = useState([]);
 
   // </>
 const [rooms, setRooms]=useState([])
+const [users, setUsers]=useState([]);
 const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,11 +52,28 @@ const dispatch = useDispatch();
     
     return () => unsubscribe()
   }, []);
- 
-  
+
+  useEffect(() => {
+    const q = query(collection(db, "Accounts"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let usersArr = [];
+      querySnapshot.forEach((doc) => {
+        usersArr.push({ ...doc.data(), id: doc.id })
+      })
+      setUsers(usersArr);
+    })
+    
+    return () => unsubscribe()
+  }, []);
+   
   useEffect(() => {
     dispatch(getRooms(rooms))
   }, [rooms]);
+
+  useEffect(() => {
+    dispatch(getUsers(users))
+  }, [users]);
+
   return (
     <div className="App">
 
@@ -63,7 +82,7 @@ const dispatch = useDispatch();
         createAccount()
       }}>Получить данные</button>*/}
       
-      {console.log(rooms)} 
+      {/* {console.log(rooms)}  */}
     </div>
   );
 }

@@ -15,9 +15,13 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 export const roomsRef = query(collection(db, "Rooms"));
-
 export const getRoomsFirebase = async () => {
   const dbRooms = await roomsRef.once("value");
   return dbRooms.val().reduce((acc, room) => ({ ...acc, [room.id]: room }), {})
 };
 
+export const usersRef = query(collection(db, "Accounts"));
+export const getUsersFirebase = async () => {
+  const dbUsers = await usersRef.once("value");
+  return dbUsers.val().reduce((acc, room) => ({ ...acc, [room.id]: room }), {})
+};

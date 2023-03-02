@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import roomReducer from "./roomReducer";
+import userReducer from "./userReducer";
 // import { createReducer } from "@reduxjs/toolkit";
 
 // const rootReducer = createReducer([], (builder) => {
@@ -14,7 +15,6 @@ import roomReducer from "./roomReducer";
 
 const rootReducer = combineReducers({
     rooms: roomReducer,
-    // users:"",
-    // notification:"",
+    users: userReducer,
 });
 export default rootReducer;
