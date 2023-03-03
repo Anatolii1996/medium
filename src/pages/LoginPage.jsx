@@ -72,7 +72,7 @@ const LoginPage = () => {
           }}
         >
           <Button type="primary" htmlType="submit">
-            Submit
+            Log in
           </Button>
         </Form.Item>
       </Form>

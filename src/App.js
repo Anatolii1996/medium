@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import './App.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,6 +8,9 @@ import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
 import LoginPage from './pages/LoginPage';
+import { Routes, Route } from "react-router";
+import Header from './components/Header';
+import MainPage from './pages/MainPaje';
 
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
@@ -37,9 +41,9 @@ const [rooms, SetRooms] = useState([]);
   }, []); */}
 
   // </>
-const [rooms, setRooms]=useState([])
-const [users, setUsers]=useState([]);
-const dispatch = useDispatch();
+  const [rooms, setRooms] = useState([])
+  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const q = query(collection(db, "Rooms"));
@@ -50,7 +54,7 @@ const dispatch = useDispatch();
       })
       setRooms(roomsArr);
     })
-    
+
     return () => unsubscribe()
   }, []);
 
@@ -63,10 +67,10 @@ const dispatch = useDispatch();
       })
       setUsers(usersArr);
     })
-    
+
     return () => unsubscribe()
   }, []);
-   
+
   useEffect(() => {
     dispatch(getRooms(rooms))
   }, [rooms]);
@@ -76,17 +80,22 @@ const dispatch = useDispatch();
   }, [users]);
 
   return (
-    <div className="App">
 
-      {/*Вызов функции записи данных в firebase
-       <button onClick={()=>{
-        createAccount()
-      }}>Получить данные</button>*/}
-      
-      {/* {console.log(rooms)}  */}
+    // {/*Вызов функции записи данных в firebase
+    //    <button onClick={()=>{
+    //     createAccount()
+    //   }}>Получить данные</button>*/}
+    <Routes>
+      <Route path='/' element={<Header />}>
+        <Route path="/" element={<MainPage/>}></Route>
+      </Route>
+    </Routes>
 
-      <LoginPage/>
-    </div>
+
+
+
+
+
   );
 }
 
