@@ -1,14 +1,17 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import {  Modal } from 'antd';
+import { useNavigate } from "react-router";
 
 const ErrorPage=()=>{
+    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(true);
    
     const handleOk = () => {
-      setIsModalOpen(false);
+        navigate("/");
     };
     const handleCancel = () => {
+        navigate("/");
       setIsModalOpen(false);
     };
     return (   
