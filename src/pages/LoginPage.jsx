@@ -68,7 +68,8 @@ const LoginPage = () => {
           remember: true,
         }}
         autoComplete="off"
-      >
+      ><h4>Autentification</h4>
+      <hr/>
         <Form.Item
           label="Username"
           name="username"
@@ -83,6 +84,7 @@ const LoginPage = () => {
             onChange={(e) => {
               setInputName(e.target.value);
             }}
+            
           />
         </Form.Item>
 
