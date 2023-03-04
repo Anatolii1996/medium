@@ -1,5 +1,7 @@
-import React from "react";
+/* eslint-disable */
+import React, { useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
+import { useSelector } from "react-redux";
 const onFinish = (values) => {
   console.log("Success:", values);
 };
@@ -8,6 +10,19 @@ const onFinishFailed = (errorInfo) => {
 };
 
 const LoginPage = () => {
+  const { users } = useSelector((state) => state);
+  const usersName = [];
+  const usersPass = [];
+  const [inputName, setInputName] = useState("");
+  const [inputPass, setInputPass] = useState("");
+
+  useEffect(() => {
+    for (const user in users) {
+      usersName.push(users[user].name);
+      usersPass.push(users[user].password);
+    }
+  }, [users]);
+
   return (
     <div className="form-wrapper">
       <Form
@@ -38,7 +53,11 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input />
+          <Input
+            onChange={(e) => {
+              setInputName(e.target.value);
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -51,7 +70,11 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            onChange={(e) => {
+              setInputPass(e.target.value);
+            }}
+          />
         </Form.Item>
 
         <Form.Item
@@ -76,6 +99,7 @@ const LoginPage = () => {
           </Button>
         </Form.Item>
       </Form>
+      {/* {console.log(users)} */}
     </div>
   );
 };
