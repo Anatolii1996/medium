@@ -41,8 +41,9 @@ const [rooms, SetRooms] = useState([]);
   }, []); */}
 
   // </>
-  const [rooms, setRooms] = useState([])
+  const [rooms, setRooms] = useState([]);
   const [users, setUsers] = useState([]);
+  const[userAvatar, setUserAvatar]=useState("https://firebasestorage.googleapis.com/v0/b/laboratory-2-52bca.appspot.com/o/44562.png?alt=media&token=ccd67ba1-6de2-4dab-b934-8f97335d8c65")
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -86,8 +87,9 @@ const [rooms, SetRooms] = useState([]);
     //     createAccount()
     //   }}>Получить данные</button>*/}
     <Routes>
-      <Route path='/' element={<Header />}>
-        <Route path="/" element={<MainPage/>}></Route>
+      <Route path='/' element={<Header userAvatar={userAvatar} setUserAvatar={setUserAvatar}/>}>
+        <Route path="/" element={<LoginPage/>}></Route>
+        <Route path='/content' element={<MainPage/>}></Route>
       </Route>
     </Routes>
 
