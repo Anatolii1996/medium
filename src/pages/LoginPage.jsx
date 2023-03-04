@@ -2,26 +2,54 @@
 import React, { useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useSelector } from "react-redux";
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+import { useNavigate } from "react-router";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const { users } = useSelector((state) => state);
-  const usersName = [];
-  const usersPass = [];
+
+  const [userArrName, setUserArrName] = useState([]);
+  const [userArrPass, setUserArrPass] = useState([]);
+
   const [inputName, setInputName] = useState("");
   const [inputPass, setInputPass] = useState("");
+  const [validName, setValidName] = useState(5);
+  const [validPass, setValidPass] = useState(5);
 
   useEffect(() => {
     for (const user in users) {
-      usersName.push(users[user].name);
-      usersPass.push(users[user].password);
+      setUserArrName((prevUserName) => [...prevUserName, users[user].name]);
+      setUserArrPass((prevUserPass) => [...prevUserPass, users[user].password]);
     }
   }, [users]);
+
+  const checkValidName = () => {
+    for (const name of userArrName) {
+      if (name == inputName) {
+        return setValidName(true);
+      }else{
+        setValidName(false)
+      }
+    }
+  };
+
+  const checkValidPass = () => {
+    for (const pass of userArrPass) {
+      if (pass == inputPass) {
+        return setValidPass(true);
+      }else{
+        setValidPass(false)
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (validPass===true && validName===true) {
+      navigate("/content");
+    }else if(validPass===false||validName===false){
+      navigate("/error");
+    }
+  }, [validPass]);
 
   return (
     <div className="form-wrapper">
@@ -39,8 +67,6 @@ const LoginPage = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
@@ -94,12 +120,20 @@ const LoginPage = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={() => {
+              checkValidName();
+              checkValidPass();
+              
+            }}
+          >
             Log in
           </Button>
         </Form.Item>
       </Form>
-      {/* {console.log(users)} */}
+      
     </div>
   );
 };

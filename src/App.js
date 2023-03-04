@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import { Routes, Route } from "react-router";
 import Header from './components/Header';
 import MainPage from './pages/MainPaje';
+import ErrorPage from './pages/ErrorPage';
 
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
@@ -90,6 +91,7 @@ const [rooms, SetRooms] = useState([]);
       <Route path='/' element={<Header userAvatar={userAvatar} setUserAvatar={setUserAvatar}/>}>
         <Route path="/" element={<LoginPage/>}></Route>
         <Route path='/content' element={<MainPage/>}></Route>
+        <Route path='/error' element={<ErrorPage/>}></Route>
       </Route>
     </Routes>
 
