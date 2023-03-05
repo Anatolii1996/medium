@@ -1,47 +1,47 @@
 /* eslint-disable */
-import React, {useState, useEffect} from "react";
-import MyTable from "../components/MyTable";
+import React, { useState, useEffect } from "react";
+// import MyTable from "../components/MyTable";
 import { useSelector } from "react-redux";
 
-const MainPage=()=>{
-    const [data, setData] = useState();
-    // const [loading, setLoading] = useState(false);
-    const [tableParams, setTableParams] = useState({
-        pagination: {
-          current: 1,
-          pageSize: 10,
-        },
-      });
+const MainPage = () => {
+  const [data, setData] = useState({});
 
-    const { rooms } = useSelector((state) => state)
+  const { rooms } = useSelector((state) => state);
   useEffect(() => {
     setData(rooms);
-    setTableParams({
-        ...tableParams,
-        pagination: {
-          ...tableParams.pagination,
-          total: 20,
-          // 200 is mock data, you should read it from server
-          // total: data.totalCount,
-        },
-      });
-  }, [JSON.stringify(tableParams)]);
+  }, [rooms]);
 
-  const handleTableChange = (pagination, filters, sorter) => {
-    setTableParams({
-      pagination,
-      filters,
-      ...sorter,
-    });
+  return (
+    <div className="main_content">
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Number</th>
+            <th scope="col">Type</th>
+            <th scope="col">Occupancy</th>
+            <th scope="col">Price</th>
+            <th scope="col">Guest</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(data).map((el) => {
+            return (
+              <tr>
+                <td scope="row">{el[1].number}</td>
+                <td>{el[1].type}</td>
+                <td>{el[1].occupancy}</td>
+                <td>{el[1].price}</td>
+                <td>{el[1].guest}</td>
+                <td><button className="btn btn-primary">More information</button></td>
+              </tr>
+            );
+          })}
 
-    // `dataSource` is useless since `pageSize` changed
-    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-      setData([]);
-    }
-  };
-
-return <div className="main_content">
-    <MyTable data={data} />
-</div>
+          
+        </tbody>
+      </table>
+    </div>
+  );
 };
 export default MainPage;
