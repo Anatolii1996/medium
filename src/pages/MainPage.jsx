@@ -16,11 +16,11 @@ const MainPage = () => {
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">Number</th>
-            <th scope="col">Type</th>
-            <th scope="col">Occupancy</th>
-            <th scope="col">Price</th>
-            <th scope="col">Guest</th>
+            <th scope="col" className="col-sm-2">Number</th>
+            <th scope="col" className="col-sm-2">Type</th>
+            <th scope="col" className="col-sm-2">Occupancy</th>
+            <th scope="col" className="col-sm-2">Price</th>
+            <th scope="col" className="col-sm-2">Guest</th>
             <th scope="col"></th>
           </tr>
         </thead>
