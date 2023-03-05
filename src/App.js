@@ -10,7 +10,7 @@ import { db } from './firebase';
 import LoginPage from './pages/LoginPage';
 import { Routes, Route } from "react-router";
 import Header from './components/Header';
-import MainPage from './pages/MainPaje';
+import MainPage from './pages/MainPage';
 import ErrorPage from './pages/ErrorPage';
 
 // import axios from 'axios';
