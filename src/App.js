@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import './App.scss';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
@@ -12,6 +12,7 @@ import { Routes, Route } from "react-router";
 import Header from './components/Header';
 import MainPage from './pages/MainPage';
 import ErrorPage from './pages/ErrorPage';
+import { useNavigate } from "react-router";
 
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
@@ -81,6 +82,15 @@ const [rooms, SetRooms] = useState([]);
     dispatch(getUsers(users))
   }, [users]);
 
+  const navigate = useNavigate();
+
+  const { currentUser } = useSelector((state) => state);
+  useEffect(() => {
+    if (currentUser == "") {
+      navigate("/");
+    }
+  }, [])
+
   return (
 
     // {/*Вызов функции записи данных в firebase
@@ -90,7 +100,7 @@ const [rooms, SetRooms] = useState([]);
     <Routes>
 
       <Route path="/" element={<LoginPage />}></Route>
-      <Route path='/content' element={<Header  />}>
+      <Route path='/content' element={<Header />}>
         <Route path='/content' element={<MainPage />}></Route>
       </Route>
       <Route path='/error' element={<ErrorPage />}></Route>

@@ -5,23 +5,12 @@ import { useSelector } from "react-redux";
 
 const MainPage = () => {
   const [data, setData] = useState({});
-  const [sortedRooms, setSortedRooms] = useState({});
-
-  const sortRooms = (arr) => {
-    arr.sort((a, b) => {
-      return a[1].number - b[1].number;
-    });
-    sortedRooms(arr);
-  };
 
   const { rooms } = useSelector((state) => state);
   useEffect(() => {
     setData(rooms);
   }, [rooms]);
 
-  // useEffect(() => {
-  //   setSortedRooms(sortRooms(Object.entries(data)));
-  // }, [rooms]);
 
   return (
     <div className="main_content">
@@ -47,22 +36,26 @@ const MainPage = () => {
           </tr>
         </thead>
         <tbody>
-          {Object.entries(data).sort((a, b) => {
-      return a[1].number - b[1].number;
-    }).map((el) => {
-            return (
-              <tr key={el[1].id}>
-                <td scope="row">{el[1].number}</td>
-                <td>{el[1].type}</td>
-                <td>{el[1].occupancy}</td>
-                <td>{el[1].price}</td>
-                <td>{el[1].guest}</td>
-                <td>
-                  <button className="btn btn-primary">More information</button>
-                </td>
-              </tr>
-            );
-          })}
+          {Object.entries(data)
+            .sort((a, b) => {
+              return a[1].number - b[1].number;
+            })
+            .map((el) => {
+              return (
+                <tr key={el[1].id}>
+                  <td scope="row">{el[1].number}</td>
+                  <td>{el[1].type}</td>
+                  <td>{el[1].occupancy}</td>
+                  <td>{el[1].price}</td>
+                  <td>{el[1].guest}</td>
+                  <td>
+                    <button className="btn btn-primary">
+                      More information
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
