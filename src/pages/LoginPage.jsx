@@ -30,6 +30,9 @@ const LoginPage = () => {
   const checkValidName = () => {
     for (const name of userArrName) {
       if (name == inputName) {
+        if(checked){
+          localStorage.setItem("user", name);
+        }
         return setValidName(true);
       } else {
         setValidName(false);
@@ -40,6 +43,9 @@ const LoginPage = () => {
   const checkValidPass = () => {
     for (const pass of userArrPass) {
       if (pass == inputPass) {
+        if(checked){
+          localStorage.setItem("password", pass);
+        }
         return setValidPass(true);
       } else {
         setValidPass(false);
