@@ -21,7 +21,10 @@ const Header = () => {
           </Link>
           <div className="user">
             <img src={currentUser.payload} alt="user-photo" />
-            <Link to="/">Log out</Link>
+            <Link to="/" onClick={()=>{
+              localStorage.removeItem('user')
+              localStorage.removeItem('password')
+            }}>Log out</Link>
           </div>
         </div>
       </nav>
