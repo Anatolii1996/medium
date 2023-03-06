@@ -1,11 +1,13 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { getCurrentUser } from "../redux/action/actionCreator";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { users } = useSelector((state) => state);
 
   const [userArrName, setUserArrName] = useState([]);
@@ -27,26 +29,27 @@ const LoginPage = () => {
     for (const name of userArrName) {
       if (name == inputName) {
         return setValidName(true);
-      }else{
-        setValidName(false)
+      } else {
+        setValidName(false);
       }
     }
   };
 
   const checkValidPass = () => {
     for (const pass of userArrPass) {
+      dispatch(getCurrentUser(pass))
       if (pass == inputPass) {
         return setValidPass(true);
-      }else{
-        setValidPass(false)
+      } else {
+        setValidPass(false);
       }
     }
   };
 
   useEffect(() => {
-    if (validPass===true && validName===true) {
+    if (validPass === true && validName === true) {
       navigate("/content");
-    }else if(validPass===false||validName===false){
+    } else if (validPass === false || validName === false) {
       navigate("/error");
     }
   }, [validPass]);
@@ -68,8 +71,9 @@ const LoginPage = () => {
           remember: true,
         }}
         autoComplete="off"
-      ><h4>Autentification</h4>
-      <hr/>
+      >
+        <h4>Autentification</h4>
+        <hr />
         <Form.Item
           label="Username"
           name="username"
@@ -79,13 +83,11 @@ const LoginPage = () => {
               message: "Please input your username!",
             },
           ]}
-        
         >
           <Input
             onChange={(e) => {
               setInputName(e.target.value);
             }}
-            
           />
         </Form.Item>
 
@@ -129,14 +131,12 @@ const LoginPage = () => {
             onClick={() => {
               checkValidName();
               checkValidPass();
-              
             }}
           >
             Log in
           </Button>
         </Form.Item>
       </Form>
-      
     </div>
   );
 };

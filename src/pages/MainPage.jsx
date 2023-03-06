@@ -27,7 +27,7 @@ const MainPage = () => {
         <tbody>
           {Object.entries(data).map((el) => {
             return (
-              <tr>
+              <tr key={el[1].id}>
                 <td scope="row">{el[1].number}</td>
                 <td>{el[1].type}</td>
                 <td>{el[1].occupancy}</td>
