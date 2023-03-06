@@ -11,12 +11,14 @@ const MainPage = () => {
     setData(rooms);
   }, [rooms]);
 
-
   return (
     <div className="main_content">
       <div className="main_button_wrap">
         <button className="btn btn-primary">Clear all filters</button>
-       <label for="free_rooms"> <input type="checkbox"  id="free_rooms" /> Free rooms only</label>
+        <label for="free_rooms">
+          {" "}
+          <input type="checkbox" id="free_rooms" /> Free rooms only
+        </label>
       </div>
       <table className="table">
         <thead>
@@ -43,7 +45,7 @@ const MainPage = () => {
           {Object.entries(data)
             .sort((a, b) => {
               return a[1].number - b[1].number;
-            })
+            }).slice(0, 10)
             .map((el) => {
               return (
                 <tr key={el[1].id}>
@@ -62,6 +64,32 @@ const MainPage = () => {
             })}
         </tbody>
       </table>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              1
+            </a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">
+              2
+            </a>
+          </li>
+         
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 };
