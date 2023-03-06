@@ -44,7 +44,7 @@ const [rooms, SetRooms] = useState([]);
   // </>
   const [rooms, setRooms] = useState([]);
   const [users, setUsers] = useState([]);
-  const [userAvatar, setUserAvatar] = useState("https://firebasestorage.googleapis.com/v0/b/laboratory-2-52bca.appspot.com/o/44562.png?alt=media&token=ccd67ba1-6de2-4dab-b934-8f97335d8c65")
+  // const [userAvatar, setUserAvatar] = useState("https://firebasestorage.googleapis.com/v0/b/laboratory-2-52bca.appspot.com/o/44562.png?alt=media&token=ccd67ba1-6de2-4dab-b934-8f97335d8c65")
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const [rooms, SetRooms] = useState([]);
     <Routes>
 
       <Route path="/" element={<LoginPage />}></Route>
-      <Route path='/content' element={<Header userAvatar={userAvatar} setUserAvatar={setUserAvatar} />}>
+      <Route path='/content' element={<Header  />}>
         <Route path='/content' element={<MainPage />}></Route>
       </Route>
       <Route path='/error' element={<ErrorPage />}></Route>

@@ -37,7 +37,7 @@ const LoginPage = () => {
 
   const checkValidPass = () => {
     for (const pass of userArrPass) {
-      dispatch(getCurrentUser(pass))
+      
       if (pass == inputPass) {
         return setValidPass(true);
       } else {
@@ -45,6 +45,16 @@ const LoginPage = () => {
       }
     }
   };
+
+  const dispatchCurrentUser=()=>{
+     for (const key in users) {
+      if (users[key].password == inputPass && users[key].name == inputName) {
+        dispatch(getCurrentUser(users[key].image));
+      }
+    }
+  };
+   
+  
 
   useEffect(() => {
     if (validPass === true && validName === true) {
@@ -131,6 +141,7 @@ const LoginPage = () => {
             onClick={() => {
               checkValidName();
               checkValidPass();
+              dispatchCurrentUser();
             }}
           >
             Log in

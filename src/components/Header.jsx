@@ -4,9 +4,10 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 // import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const Header = ({ userAvatar, setUserAvatar }) => {
-  // const {users}=useSelector((state)=>state);
+const Header = () => {
+  const {currentUser}=useSelector((state)=>state);
   const [user, setUser] = useState({});
 
   return (
@@ -20,7 +21,7 @@ const Header = ({ userAvatar, setUserAvatar }) => {
             />
           </Link>
           <div className="user">
-            <img src={userAvatar} alt="user-photo" />
+            <img src={currentUser.payload} alt="user-photo" />
             <Link>Log out</Link>
           </div>
         </div>
