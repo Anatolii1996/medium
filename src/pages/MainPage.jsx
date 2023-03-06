@@ -15,7 +15,7 @@ const MainPage = () => {
     <div className="main_content">
       <div className="main_button_wrap">
         <button className="btn btn-primary">Clear all filters</button>
-        <label for="free_rooms">
+        <label htmlFor="free_rooms">
           {" "}
           <input type="checkbox" id="free_rooms" /> Free rooms only
         </label>
@@ -49,7 +49,7 @@ const MainPage = () => {
             .map((el) => {
               return (
                 <tr key={el[1].id}>
-                  <td scope="row">{el[1].number}</td>
+                  <td  scope="row">{el[1].number}</td>
                   <td>{el[1].type}</td>
                   <td>{el[1].occupancy}</td>
                   <td>{el[1].price}</td>
@@ -66,25 +66,25 @@ const MainPage = () => {
       </table>
 
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+        <ul className="pagination">
+          <li className="page-item">
+            <a className="page-link" href="#" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               1
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               2
             </a>
           </li>
          
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+          <li className="page-item">
+            <a className="page-link" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>

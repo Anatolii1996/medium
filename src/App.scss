@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-body{
+body {
   background-color: rgb(237, 235, 235);
 }
 .form-wrapper {
@@ -50,8 +50,8 @@ body{
   padding-top: 90px;
   width: 90%;
   margin: auto;
-  .main_button_wrap{
-    .btn{
+  .main_button_wrap {
+    .btn {
       margin-right: 15px;
     }
   }
@@ -61,12 +61,20 @@ body{
     thead {
       background-color: rgb(224, 221, 221);
     }
+    tbody {
+      tr {
+      
+        td {
+         line-height: 40px;
+        }
+      }
+    }
   }
 }
 .btn-primary {
   border-radius: 0;
 }
-.pagination{
+.pagination {
   width: 145px;
   margin: auto;
 }
