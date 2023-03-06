@@ -14,6 +14,10 @@ const MainPage = () => {
 
   return (
     <div className="main_content">
+      <div className="main_button_wrap">
+        <button className="btn btn-primary">Clear all filters</button>
+       <label for="free_rooms"> <input type="checkbox"  id="free_rooms" /> Free rooms only</label>
+      </div>
       <table className="table">
         <thead>
           <tr>
