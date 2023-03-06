@@ -27,6 +27,24 @@ const LoginPage = () => {
     }
   }, [users]);
 
+  useEffect(() => {
+    if (validPass === true && validName === true) {
+      navigate("/content");
+    } else if (validPass === false || validName === false) {
+      navigate("/error");
+    }
+  }, [validPass]);
+
+  useEffect(()=>{
+if(localStorage.getItem("user")){
+  setInputName(localStorage.getItem("user"));
+  setInputPass(localStorage.getItem("password"));
+  checkValidName();
+  checkValidPass();
+  dispatchCurrentUser();
+}
+  }, [])
+
   const checkValidName = () => {
     for (const name of userArrName) {
       if (name == inputName) {
@@ -61,13 +79,7 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (validPass === true && validName === true) {
-      navigate("/content");
-    } else if (validPass === false || validName === false) {
-      navigate("/error");
-    }
-  }, [validPass]);
+
 
   return (
     <div className="form-wrapper">
