@@ -13,6 +13,8 @@ const LoginPage = () => {
   const [userArrName, setUserArrName] = useState([]);
   const [userArrPass, setUserArrPass] = useState([]);
 
+  const [checked, setChecked] = useState(true);
+
   const [inputName, setInputName] = useState("");
   const [inputPass, setInputPass] = useState("");
   const [validName, setValidName] = useState(5);
@@ -37,7 +39,6 @@ const LoginPage = () => {
 
   const checkValidPass = () => {
     for (const pass of userArrPass) {
-      
       if (pass == inputPass) {
         return setValidPass(true);
       } else {
@@ -46,15 +47,13 @@ const LoginPage = () => {
     }
   };
 
-  const dispatchCurrentUser=()=>{
-     for (const key in users) {
+  const dispatchCurrentUser = () => {
+    for (const key in users) {
       if (users[key].password == inputPass && users[key].name == inputName) {
         dispatch(getCurrentUser(users[key].image));
       }
     }
   };
-   
-  
 
   useEffect(() => {
     if (validPass === true && validName === true) {
@@ -120,13 +119,14 @@ const LoginPage = () => {
 
         <Form.Item
           name="remember"
-          valuePropName="checked"
           wrapperCol={{
             offset: 8,
             span: 16,
           }}
         >
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox checked={checked} onChange={() => setChecked(!checked)}>
+            Remember me
+          </Checkbox>
         </Form.Item>
 
         <Form.Item
