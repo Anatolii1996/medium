@@ -1,14 +1,13 @@
 /* eslint-disable */
-
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 // import { useSelector } from "react-redux";
-import { useState } from "react";
+// import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const {currentUser}=useSelector((state)=>state);
-  const [user, setUser] = useState({});
+  const { currentUser } = useSelector((state) => state);
+  // const [user, setUser] = useState({});
 
   return (
     <>
@@ -22,7 +21,7 @@ const Header = () => {
           </Link>
           <div className="user">
             <img src={currentUser.payload} alt="user-photo" />
-            <Link>Log out</Link>
+            <Link to="/">Log out</Link>
           </div>
         </div>
       </nav>
