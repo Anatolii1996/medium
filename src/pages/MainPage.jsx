@@ -35,18 +35,19 @@ const columns = [
     dataIndex: "occupancy",
     filters: [
       {
-        text: "2",
-        value: "2",
+        text: 2,
+        value: 2,
       },
       {
-        text: "3",
-        value: "3",
+        text: 3,
+        value: 3,
       },
       {
-        text: "4",
-        value: "4",
+        text: 4,
+        value: 4,
       },
     ],
+    onFilter: (value, record) => record.occupancy === value,
     width: "20%",
   },
   {
