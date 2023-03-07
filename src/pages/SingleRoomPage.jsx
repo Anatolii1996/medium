@@ -50,11 +50,10 @@ const SingleRoomPage = () => {
         </div>
         <div className="feature">
           <div className="feature_button_wrap">
-          <Button type="primary" disabled>
+            <Button type="primary" disabled>
               Check in
             </Button>
             <Button type="primary">Check out</Button>
-          
           </div>
           <Descriptions
             layout="vertical"
@@ -75,6 +74,13 @@ const SingleRoomPage = () => {
             </Descriptions.Item>
           </Descriptions>
         </div>
+      </div>
+      <div className="footer_description">
+        <Descriptions labelStyle={{ fontWeight: 700, color: "black"  }} column={2}>
+          <Descriptions.Item label="Description">
+            {currentRoom.description}
+          </Descriptions.Item>
+        </Descriptions>
       </div>
     </div>
   );
