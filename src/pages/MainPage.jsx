@@ -7,8 +7,6 @@ const columns = [
   {
     title: "Number",
     dataIndex: "number",
-    // sorter: true,
-    // render: (name) => `${name.first} ${name.last}`,
     width: "20%",
   },
   {
@@ -17,7 +15,7 @@ const columns = [
     filters: [
       {
         text: "Standart",
-        value: "standart",
+        value: "standard",
       },
       {
         text: "Suite",
@@ -28,6 +26,8 @@ const columns = [
         value: "delux",
       },
     ],
+    onFilter: (value, record) => record.type.indexOf(value) === 0,
+  
     width: "20%",
   },
   {
