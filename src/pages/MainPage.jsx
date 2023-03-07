@@ -1,13 +1,11 @@
 /* eslint-disable */
 import React, { useState, useEffect, useMemo } from "react";
-// import MyTable from "../components/MyTable";
 import { useSelector } from "react-redux";
 import { Table, Col, Button, Checkbox } from "antd";
 import { getRoomsState } from "../redux/selectors";
 
 const MainPage = () => {
   const rooms = useSelector(getRoomsState);
-  const [roomsItems, setRoomsItems] = useState([]);
 
   useEffect(() => {
     const roomsArr = Object.entries(rooms)
@@ -19,7 +17,6 @@ const MainPage = () => {
         return a.number - b.number;
       });
 
-    setRoomsItems(roomsArr);
   }, [rooms]);
 
   const [isChecked, setIsChecked] = useState(false);
@@ -28,8 +25,8 @@ const MainPage = () => {
     () =>
       isChecked
         ? rooms
-        .filter((room) => !room.guest)
-        .map((room) => ({ text: room.number, value: room.number }))
+            .filter((room) => !room.guest)
+            .map((room) => ({ text: "Empty", value: "Empty" }))
         : rooms
             .filter((room) => room.guest)
             .map((room) => ({ text: room.guest, value: room.guest })),
@@ -94,12 +91,12 @@ const MainPage = () => {
       dataIndex: "guest",
       filters: guestsOptions,
       onFilter: (text, record) => {
-        if (typeof text=="number" ) {
+        if (text == "Empty") {
           return !record.guest;
         } else {
           return record.guest.startsWith(text);
         }
-      },      
+      },
       width: "20%",
     },
     {
@@ -111,16 +108,23 @@ const MainPage = () => {
     },
   ];
 
-  const filteredRooms = isChecked ? rooms.filter(room => !room.guest) : rooms;
+  const filteredRooms = isChecked ? rooms.filter((room) => !room.guest) : rooms;
+
+  const clearAll = () => {
+    
+    setIsChecked(false);
+  };
 
   return (
     <div className="main_content">
       <div className="main_header_wrap">
         <Col span={2}>
-          <Button type="primary">Clear all filters</Button>
+          <Button onClick={clearAll} type="primary">Clear all filters</Button>
         </Col>
         <Col span={6}>
-          <Checkbox onChange={(e) => setIsChecked(e.target.checked)}>Free rooms only</Checkbox>
+          <Checkbox checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)}>
+            Free rooms only
+          </Checkbox>
         </Col>
       </div>
 
