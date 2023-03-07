@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Table, Col, Button, Checkbox } from "antd";
 import { getRoomsState } from "../redux/selectors";
+import { Link } from 'react-router-dom';
 
 const MainPage = () => {
   const rooms = useSelector(getRoomsState);
@@ -102,8 +103,13 @@ const MainPage = () => {
     {
       title: "",
       dataIndex: "",
-      render: () => (
-        <button className="btn btn-primary">More information</button>
+      render: (text, record) => (
+        <Link to={`/content/room/${record.id}`}>
+        <button className="btn btn-primary">
+          More information
+          </button>
+        </Link>
+        
       ),
     },
   ];
@@ -128,7 +134,7 @@ const MainPage = () => {
         </Col>
       </div>
 
-      <Table columns={columns} dataSource={filteredRooms} />
+      <Table columns={columns} dataSource={filteredRooms} rowKey="id"/>
     </div>
   );
 };

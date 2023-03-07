@@ -1,18 +1,17 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import './App.scss';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
 import LoginPage from './pages/LoginPage';
-import { Routes, Route } from "react-router";
+import { Routes, Route, useNavigate } from "react-router";
 import Header from './components/Header';
 import MainPage from './pages/MainPage';
 import ErrorPage from './pages/ErrorPage';
-import { useNavigate } from "react-router";
+import SingleRoomPage from './pages/SingleRoomPage';
 
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
@@ -101,6 +100,8 @@ const [rooms, SetRooms] = useState([]);
       <Route path="/" element={<LoginPage />}></Route>
       <Route path='/content' element={<Header />}>
         <Route path='/content' element={<MainPage />}></Route>
+        <Route path='/content/room/:id' element={<SingleRoomPage />}></Route>
+
       </Route>
       <Route path='/error' element={<ErrorPage />}></Route>
     </Routes>
