@@ -72,6 +72,9 @@ body {
   .ant-table-pagination-right {
   justify-content: center;
 }
+:where(.css-dev-only-do-not-override-10ed4xt).ant-list-split .ant-list-item{
+  border: 0;
+}
 .single_page {
   a {
     display: flex;
@@ -102,6 +105,10 @@ body {
           font-weight:lighter
         }
       }
+    }
+    .feature{
+      width: 30%;
+
     }
   }
   
