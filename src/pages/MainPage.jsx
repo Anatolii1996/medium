@@ -134,7 +134,7 @@ const MainPage = () => {
         </Col>
       </div>
 
-      <Table columns={columns} dataSource={filteredRooms} rowKey="id"/>
+      <Table columns={columns} dataSource={filteredRooms.sort((a,b)=>a.number-b.number)} rowKey="id"/>
     </div>
   );
 };
