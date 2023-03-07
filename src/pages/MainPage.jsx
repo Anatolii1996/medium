@@ -2,12 +2,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 // import MyTable from "../components/MyTable";
 import { useSelector } from "react-redux";
-import { Table } from "antd";
+import { Table, Col, Button, Checkbox } from "antd";
 import { getRoomsState } from "../redux/selectors";
 
-
 const MainPage = () => {
-  const  rooms  = useSelector(getRoomsState);
+  const rooms = useSelector(getRoomsState);
   const [roomsItems, setRoomsItems] = useState([]);
 
   const [isChecked, setIsChecked] = useState(false);
@@ -24,13 +23,16 @@ const MainPage = () => {
 
     setRoomsItems(roomsArr);
   }, [rooms]);
-  
-  const guestsOptions = useMemo(() => (!isChecked
-    ? rooms
-      .filter((room) => room.guest)
-      .map((room) => ({ text: room.guest, value: room.guest }))
-    : []
-  ), [rooms, isChecked]);
+
+  const guestsOptions = useMemo(
+    () =>
+      !isChecked
+        ? rooms
+            .filter((room) => room.guest)
+            .map((room) => ({ text: room.guest, value: room.guest }))
+        : [],
+    [rooms, isChecked]
+  );
 
   const columns = [
     {
@@ -56,8 +58,8 @@ const MainPage = () => {
         },
       ],
       onFilter: (value, record) => record.type.indexOf(value) === 0,
-    
-      width: "20%",
+
+      width: "18%",
     },
     {
       title: "Occupancy",
@@ -95,22 +97,25 @@ const MainPage = () => {
     {
       title: "",
       dataIndex: "",
-      render: () => <button className="btn btn-primary">More information</button>,
-      
+      render: () => (
+        <button className="btn btn-primary">More information</button>
+      ),
     },
   ];
-  
+
   return (
-    <>
-     {
-      console.log(Object.entries(rooms) )}
-    <Table
-      columns={columns}
-      dataSource={roomsItems}
-    />
-    </>
-   
-   
+    <div className="main_content">
+      <div className="main_header_wrap">
+        <Col span={2}>
+          <Button type="primary">Clear all filters</Button>
+        </Col>
+        <Col span={6}>
+          <Checkbox>Free rooms only</Checkbox>
+        </Col>
+      </div>
+
+      <Table columns={columns} dataSource={roomsItems} />
+    </div>
   );
 };
 export default MainPage;
