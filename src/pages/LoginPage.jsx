@@ -35,20 +35,20 @@ const LoginPage = () => {
     }
   }, [validPass]);
 
-  useEffect(()=>{
-if(localStorage.getItem("user")){
-  setInputName(localStorage.getItem("user"));
-  setInputPass(localStorage.getItem("password"));
-  checkValidName();
-  checkValidPass();
-  dispatchCurrentUser();
-}
-  }, [])
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setInputName(localStorage.getItem("user"));
+      setInputPass(localStorage.getItem("password"));
+      checkValidName();
+      checkValidPass();
+      dispatchCurrentUser();
+    }
+  }, []);
 
   const checkValidName = () => {
     for (const name of userArrName) {
       if (name == inputName) {
-        if(checked){
+        if (checked) {
           localStorage.setItem("user", name);
         }
         return setValidName(true);
@@ -61,7 +61,7 @@ if(localStorage.getItem("user")){
   const checkValidPass = () => {
     for (const pass of userArrPass) {
       if (pass == inputPass) {
-        if(checked){
+        if (checked) {
           localStorage.setItem("password", pass);
         }
         return setValidPass(true);
@@ -78,8 +78,6 @@ if(localStorage.getItem("user")){
       }
     }
   };
-
-
 
   return (
     <div className="form-wrapper">
@@ -112,6 +110,7 @@ if(localStorage.getItem("user")){
           ]}
         >
           <Input
+            placeholder={inputName}
             onChange={(e) => {
               setInputName(e.target.value);
             }}
@@ -129,6 +128,7 @@ if(localStorage.getItem("user")){
           ]}
         >
           <Input.Password
+           placeholder={inputPass}
             onChange={(e) => {
               setInputPass(e.target.value);
             }}
