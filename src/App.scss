@@ -93,8 +93,14 @@ body {
     .description {
       width: 20%;
       margin-left: 20px;
-      h2 {
+      h3 {
         text-decoration: underline;
+      }
+      p{
+        font-weight: 500;
+        span{
+          font-weight:lighter
+        }
       }
     }
   }
