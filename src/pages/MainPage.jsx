@@ -77,18 +77,26 @@ const MainPage = () => {
         },
       ],
       onFilter: (value, record) => record.occupancy === value,
-      width: "20%",
+      width: "10%",
     },
     {
       title: "Price",
       dataIndex: "price",
       sorter: (a, b) => a.price - b.price,
+      width: "15%",
     },
     {
       title: "Guest",
       dataIndex: "guest",
       filters: guestsOptions,
       onFilter: (text, record) => record.guest.startsWith(text),
+      width: "20%",
+    },
+    {
+      title: "",
+      dataIndex: "",
+      render: () => <button className="btn btn-primary">More information</button>,
+      
     },
   ];
   
