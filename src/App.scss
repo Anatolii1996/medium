@@ -81,3 +81,6 @@ body {
 .ant-table-wrapper{
   padding-top: 80px;
 }
+:where(.css-dev-only-do-not-override-10ed4xt).ant-table-wrapper .ant-table-pagination-right{
+  justify-content: center;
+}
