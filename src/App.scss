@@ -72,7 +72,7 @@ body {
   .ant-table-pagination-right {
   justify-content: center;
 }
-:where(.css-dev-only-do-not-override-10ed4xt).ant-list-split .ant-list-item{
+:where(.css-dev-only-do-not-override-10ed4xt).ant-list-split .ant-list-item {
   border: 0;
 }
 .single_page {
@@ -88,10 +88,8 @@ body {
   .single_center {
     display: flex;
     padding-top: 20px;
-      .ant-carousel {
-      
+    .ant-carousel {
       width: 50%;
-    
     }
     .description {
       width: 20%;
@@ -99,17 +97,23 @@ body {
       h3 {
         text-decoration: underline;
       }
-      p{
+      p {
         font-weight: 500;
-        span{
-          font-weight:lighter
+        span {
+          font-weight: lighter;
         }
       }
     }
-    .feature{
+    .feature {
       width: 30%;
 
+      .feature_button_wrap {
+        display: flex;
+        justify-content: flex-end;
+        button {
+          margin-left: 10px;
+        }
+      }
     }
   }
-  
 }

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { getRoomsState } from "../redux/selectors";
 import { Link, useParams } from "react-router-dom";
 import { HomeOutlined, CheckOutlined } from "@ant-design/icons";
-import { Carousel, Descriptions, List } from "antd";
+import { Carousel, Descriptions, List, Button } from "antd";
 
 const SingleRoomPage = () => {
   const { id } = useParams();
@@ -49,7 +49,17 @@ const SingleRoomPage = () => {
           </p>
         </div>
         <div className="feature">
-          <Descriptions layout="vertical" labelStyle={{ fontWeight: 700, color: "black", fontSize: 20 }}>
+          <div className="feature_button_wrap">
+          <Button type="primary" disabled>
+              Check in
+            </Button>
+            <Button type="primary">Check out</Button>
+          
+          </div>
+          <Descriptions
+            layout="vertical"
+            labelStyle={{ fontWeight: 700, color: "black", fontSize: 20 }}
+          >
             <Descriptions.Item label="Features">
               <List
                 size="small"
