@@ -9,8 +9,6 @@ const MainPage = () => {
   const rooms = useSelector(getRoomsState);
   const [roomsItems, setRoomsItems] = useState([]);
 
-  const [isChecked, setIsChecked] = useState(false);
-
   useEffect(() => {
     const roomsArr = Object.entries(rooms)
       .map(([key, value]) => ({
@@ -24,13 +22,17 @@ const MainPage = () => {
     setRoomsItems(roomsArr);
   }, [rooms]);
 
+  const [isChecked, setIsChecked] = useState(false);
+
   const guestsOptions = useMemo(
     () =>
-      !isChecked
+      isChecked
         ? rooms
+        .filter((room) => !room.guest)
+        .map((room) => ({ text: room.number, value: room.number }))
+        : rooms
             .filter((room) => room.guest)
-            .map((room) => ({ text: room.guest, value: room.guest }))
-        : [],
+            .map((room) => ({ text: room.guest, value: room.guest })),
     [rooms, isChecked]
   );
 
@@ -91,7 +93,13 @@ const MainPage = () => {
       title: "Guest",
       dataIndex: "guest",
       filters: guestsOptions,
-      onFilter: (text, record) => record.guest.startsWith(text),
+      onFilter: (text, record) => {
+        if (typeof text=="number" ) {
+          return !record.guest;
+        } else {
+          return record.guest.startsWith(text);
+        }
+      },      
       width: "20%",
     },
     {
@@ -103,6 +111,8 @@ const MainPage = () => {
     },
   ];
 
+  const filteredRooms = isChecked ? rooms.filter(room => !room.guest) : rooms;
+
   return (
     <div className="main_content">
       <div className="main_header_wrap">
@@ -110,11 +120,11 @@ const MainPage = () => {
           <Button type="primary">Clear all filters</Button>
         </Col>
         <Col span={6}>
-          <Checkbox>Free rooms only</Checkbox>
+          <Checkbox onChange={(e) => setIsChecked(e.target.checked)}>Free rooms only</Checkbox>
         </Col>
       </div>
 
-      <Table columns={columns} dataSource={roomsItems} />
+      <Table columns={columns} dataSource={filteredRooms} />
     </div>
   );
 };
