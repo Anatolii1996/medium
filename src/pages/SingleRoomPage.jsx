@@ -50,10 +50,12 @@ const SingleRoomPage = () => {
         </div>
         <div className="feature">
           <div className="feature_button_wrap">
-            <Button type="primary" disabled>
+            <Button type="primary" disabled={currentRoom.guest}>
               Check in
             </Button>
-            <Button type="primary">Check out</Button>
+            <Button type="primary" disabled={!currentRoom.guest}>
+              Check out
+            </Button>
           </div>
           <Descriptions
             layout="vertical"
@@ -76,7 +78,10 @@ const SingleRoomPage = () => {
         </div>
       </div>
       <div className="footer_description">
-        <Descriptions labelStyle={{ fontWeight: 700, color: "black"  }} column={2}>
+        <Descriptions
+          labelStyle={{ fontWeight: 700, color: "black" }}
+          column={2}
+        >
           <Descriptions.Item label="Description">
             {currentRoom.description}
           </Descriptions.Item>
