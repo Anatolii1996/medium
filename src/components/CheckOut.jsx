@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "antd";
 
-const CheckOutPage = ({ currentRoom }) => {
+const CheckOut = ({ currentRoom }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -25,9 +25,8 @@ const CheckOutPage = ({ currentRoom }) => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        
       </Modal>
     </>
   );
 };
-export default CheckOutPage;
+export default CheckOut;

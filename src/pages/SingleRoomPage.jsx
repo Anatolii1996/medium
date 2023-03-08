@@ -5,7 +5,8 @@ import { getRoomsState } from "../redux/selectors";
 import { Link, useParams } from "react-router-dom";
 import { HomeOutlined, CheckOutlined } from "@ant-design/icons";
 import { Carousel, Descriptions, List, Button } from "antd";
-import CheckOutPage from "./CheckOutPage";
+import CheckOut from "../components/CheckOut";
+import CheckIn from "../components/CheckIn";
 
 const SingleRoomPage = () => {
   const { id } = useParams();
@@ -51,10 +52,8 @@ const SingleRoomPage = () => {
         </div>
         <div className="feature">
           <div className="feature_button_wrap">
-            <Button type="primary" disabled={currentRoom.guest}>
-              Check in
-            </Button>
-            <CheckOutPage currentRoom={currentRoom}/>
+            <CheckIn currentRoom={currentRoom}/>
+            <CheckOut currentRoom={currentRoom}/>
           </div>
           <Descriptions
             layout="vertical"
