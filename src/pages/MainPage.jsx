@@ -34,6 +34,11 @@ const MainPage = () => {
     [rooms, isChecked]
   );
 
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const handleTableChange = (pagination, filters, sorter) => {
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
   const columns = [
     {
       title: "Number",
@@ -53,12 +58,12 @@ const MainPage = () => {
           value: "suite",
         },
         {
-          text: "Delux",
-          value: "delux",
+          text: "Deluxе",
+          value: "deluxe",
         },
       ],
-      onFilter: (value, record) => record.type.indexOf(value) === 0,
-
+      onFilter: (type, record) => record.type === type,
+      filteredValue: filteredInfo.type || null,
       width: "18%",
     },
     {
@@ -117,7 +122,7 @@ const MainPage = () => {
   const filteredRooms = isChecked ? rooms.filter((room) => !room.guest) : rooms;
 
   const clearAll = () => {
-    
+    setFilteredInfo({});
     setIsChecked(false);
   };
 
@@ -134,7 +139,7 @@ const MainPage = () => {
         </Col>
       </div>
 
-      <Table columns={columns} dataSource={filteredRooms.sort((a,b)=>a.number-b.number)} rowKey="id"/>
+      <Table columns={columns} dataSource={filteredRooms.sort((a,b)=>a.number-b.number)} rowKey="id"  onChange={handleTableChange}/>
     </div>
   );
 };
