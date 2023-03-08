@@ -20,14 +20,12 @@ const CheckOutPage = ({ currentRoom }) => {
         Check out
       </Button>
       <Modal
-        title="Basic Modal"
+        title={`Do you really want to check out the room ${currentRoom.number} ?` }
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        
       </Modal>
     </>
   );
