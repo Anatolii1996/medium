@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import {  collection,  query } from 'firebase/firestore';
+import { collection, query, updateDoc, doc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCiJNMQ2FdeJGW0Z7F81sSsn8rP9AUME7E",
@@ -19,6 +19,13 @@ export const getRoomsFirebase = async () => {
   const dbRooms = await roomsRef.once("value");
   return dbRooms.val().reduce((acc, room) => ({ ...acc, [room.id]: room }), {})
 };
+
+export const refRoom = collection(db, "Rooms");
+export const updateRoomFirestore = async (id, data) => {
+  const roomRef = doc(refRoom, id);
+  await updateDoc(roomRef, data);
+};
+
 
 export const usersRef = query(collection(db, "Accounts"));
 export const getUsersFirebase = async () => {
