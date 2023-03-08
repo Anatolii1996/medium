@@ -37,13 +37,14 @@ const MainPage = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const handleTableChange = (pagination, filters, sorter) => {
     setFilteredInfo(filters);
-    setSortedInfo(sorter);
+    // setSortedInfo(sorter);
   };
   const columns = [
     {
       title: "Number",
       dataIndex: "number",
       width: "20%",
+      filteredValue: null
     },
     {
       title: "Type",
@@ -92,18 +93,14 @@ const MainPage = () => {
       dataIndex: "price",
       sorter: (a, b) => a.price - b.price,
       width: "15%",
+      filteredValue: null
     },
     {
       title: "Guest",
       dataIndex: "guest",
       filters: guestsOptions,
-      onFilter: (text, record) => {
-        if (text == "Empty") {
-          return !record.guest;
-        } else {
-          return record.guest.startsWith(text);
-        }
-      },
+      onFilter: (text, record) => record.guest.startsWith(text),
+      filteredValue: filteredInfo.guest || null,
       width: "20%",
     },
     {
@@ -117,6 +114,7 @@ const MainPage = () => {
         </Link>
         
       ),
+      filteredValue: null
     },
   ];
 
