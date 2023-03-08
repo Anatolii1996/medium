@@ -83,7 +83,8 @@ const MainPage = () => {
           value: 4,
         },
       ],
-      onFilter: (value, record) => record.occupancy === value,
+      onFilter: (occupancy, record) => record.occupancy === occupancy,
+      filteredValue: filteredInfo.occupancy || null,
       width: "10%",
     },
     {
