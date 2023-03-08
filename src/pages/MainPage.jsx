@@ -35,9 +35,11 @@ const MainPage = () => {
   );
 
   const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
   const handleTableChange = (pagination, filters, sorter) => {
     setFilteredInfo(filters);
-    // setSortedInfo(sorter);
+    setSortedInfo(sorter);
+    console.log(sortedInfo);
   };
   const columns = [
     {
@@ -93,7 +95,8 @@ const MainPage = () => {
       dataIndex: "price",
       sorter: (a, b) => a.price - b.price,
       width: "15%",
-      filteredValue: null
+      sortOrder: sortedInfo.field === 'price' && sortedInfo.order,
+      
     },
     {
       title: "Guest",
@@ -122,6 +125,7 @@ const MainPage = () => {
 
   const clearAll = () => {
     setFilteredInfo({});
+    setSortedInfo({});
     setIsChecked(false);
   };
 
