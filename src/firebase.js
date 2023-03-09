@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, query, updateDoc, doc } from 'firebase/firestore';
+import { collection, query,  doc, setDoc, updateDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCiJNMQ2FdeJGW0Z7F81sSsn8rP9AUME7E",
@@ -20,9 +21,9 @@ export const getRoomsFirebase = async () => {
   return dbRooms.val().reduce((acc, room) => ({ ...acc, [room.id]: room }), {})
 };
 
-export const refRoom = collection(db, "Rooms");
+// export const refRoom = collection(db, "Rooms");
 export const updateRoomFirestore = async (id, data) => {
-  const roomRef = doc(refRoom, id);
+  const roomRef = doc(db, "Rooms", id);
   await updateDoc(roomRef, data);
 };
 

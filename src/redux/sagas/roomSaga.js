@@ -11,7 +11,7 @@ function* getRoomsSaga() {
 
 function* updateRoom(id, updatedFields) {
 
-   yield call(updateRoomFirestore(id, updatedFields) ) ;
+   yield call(updateRoomFirestore(id, updatedFields)  ) ;
     yield put(updateRoomGuest(id, updatedFields));
 
 }
