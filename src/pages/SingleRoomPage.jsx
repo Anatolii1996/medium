@@ -1,8 +1,9 @@
 /* eslint-disable */
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector } from "react-redux";
 import { getRoomsState } from "../redux/selectors";
 import { Link, useParams } from "react-router-dom";
+import {  useNavigate } from "react-router";
 import { HomeOutlined, CheckOutlined } from "@ant-design/icons";
 import { Carousel, Descriptions, List, Button } from "antd";
 import CheckOut from "../components/CheckOut";
@@ -11,13 +12,24 @@ import CheckIn from "../components/CheckIn";
 const SingleRoomPage = () => {
   const { id } = useParams();
   const rooms = useSelector(getRoomsState);
-
   let currentRoom = {};
+
+  const navigate = useNavigate();
+
+  // const { currentUser } = useSelector((state) => state);
+  // useEffect(() => {
+  //   if (currentUser == "") {
+  //     navigate("/");
+  //   }
+  // }, [])
+  
   rooms.forEach((el) => {
     if (el.id == id) {
       currentRoom = el;
     }
   });
+  
+  
   return (
     <div className="main_content single_page">
       <Link to="/">
@@ -26,14 +38,15 @@ const SingleRoomPage = () => {
       </Link>
       <div className="single_center">
         <Carousel className="room_img" autoplay>
-          {currentRoom.gallery.map((imageUrl) => (
+          {currentRoom.gallery? currentRoom.gallery.map((imageUrl) => (
             <img
               key={imageUrl}
               src={imageUrl}
               alt={currentRoom.type}
               className="slider-image"
             />
-          ))}
+          )): navigate("/")
+          }
         </Carousel>
         <div className="description">
           <h3>{`Room ${currentRoom.number}`}</h3>
@@ -85,6 +98,7 @@ const SingleRoomPage = () => {
           </Descriptions.Item>
         </Descriptions>
       </div>
+      
     </div>
   );
 };

@@ -10,22 +10,21 @@ function* getRoomsSaga() {
 
 
 function* updateRoom(id, updatedFields) {
-
-   yield call(updateRoomFirestore(id, updatedFields)  ) ;
+    yield call(updateRoomFirestore, id, updatedFields);
     yield put(updateRoomGuest(id, updatedFields));
+  }
 
-}
-
-function* checkOutRoomSaga({ payload }) {
+  function* checkOutRoomSaga({ payload }) {
+    // console.log("checkOutRoomSaga");
     const { id } = payload;
     const updatedFields = {
-        checkInDate: null,
-        checkOutDate: null,
-        isCheckedIn: false,
-        guest: '',
+      checkInDate: null,
+      checkOutDate: null,
+      isCheckedIn: false,
+      guest: '',
     };
-    yield updateRoom(id, updatedFields);
-}
+    yield call(updateRoom, id, updatedFields);
+  }
 
 export default function* watchRoomSaga() {
     yield takeEvery(GET_ROOMS, getRoomsSaga);
