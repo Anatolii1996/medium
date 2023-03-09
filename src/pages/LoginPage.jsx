@@ -4,7 +4,6 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getCurrentUser } from "../redux/action/actionCreator";
-import userEvent from "@testing-library/user-event";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ const LoginPage = () => {
   const { users } = useSelector((state) => state);
 
   const [checked, setChecked] = useState(true);
-  const [currentUser, setCurrentUser] = useState({});
+  // const [currentUser, setCurrentUser] = useState({});
 
   const [inputName, setInputName] = useState("");
   const [inputPass, setInputPass] = useState("");

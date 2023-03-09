@@ -1,12 +1,30 @@
 /* eslint-disable */
 import React, { useState, useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Table, Col, Button, Checkbox } from "antd";
 import { getRoomsState } from "../redux/selectors";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { getCurrentUser } from "../redux/action/actionCreator";
 
 const MainPage = () => {
   const rooms = useSelector(getRoomsState);
+  const { users } = useSelector((state) => state);
+  const [currentUser, setCurrentUser] = useState({});
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const localUser = localStorage.getItem("user");
+      const currentUser = Object.values(users).find(
+        (user) => user.name === localUser
+      );
+      // console.log(currentUser);
+      setCurrentUser(currentUser);
+      if (currentUser && currentUser.image) {
+        dispatch(getCurrentUser(currentUser.image));
+      }
+    }
+  }, [currentUser, users]);
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -34,7 +52,7 @@ const MainPage = () => {
       title: "Number",
       dataIndex: "number",
       width: "20%",
-      filteredValue: null
+      filteredValue: null,
     },
     {
       title: "Type",
@@ -83,8 +101,7 @@ const MainPage = () => {
       dataIndex: "price",
       sorter: (a, b) => a.price - b.price,
       width: "15%",
-      sortOrder: sortedInfo.field === 'price' && sortedInfo.order,
-      
+      sortOrder: sortedInfo.field === "price" && sortedInfo.order,
     },
     {
       title: "Guest",
@@ -99,13 +116,10 @@ const MainPage = () => {
       dataIndex: "",
       render: (text, record) => (
         <Link to={`/content/room/${record.id}`}>
-        <button className="btn btn-primary">
-          More information
-          </button>
+          <button className="btn btn-primary">More information</button>
         </Link>
-        
       ),
-      filteredValue: null
+      filteredValue: null,
     },
   ];
 
@@ -121,16 +135,26 @@ const MainPage = () => {
     <div className="main_content">
       <div className="main_header_wrap">
         <Col span={2}>
-          <Button onClick={clearAll} type="primary">Clear all filters</Button>
+          <Button onClick={clearAll} type="primary">
+            Clear all filters
+          </Button>
         </Col>
         <Col span={6}>
-          <Checkbox checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)}>
+          <Checkbox
+            checked={isChecked}
+            onChange={(e) => setIsChecked(e.target.checked)}
+          >
             Free rooms only
           </Checkbox>
         </Col>
       </div>
 
-      <Table columns={columns} dataSource={filteredRooms.sort((a,b)=>a.number-b.number)} rowKey="id"  onChange={handleTableChange}/>
+      <Table
+        columns={columns}
+        dataSource={filteredRooms.sort((a, b) => a.number - b.number)}
+        rowKey="id"
+        onChange={handleTableChange}
+      />
     </div>
   );
 };
