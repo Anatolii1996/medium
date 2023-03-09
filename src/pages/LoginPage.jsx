@@ -4,79 +4,54 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getCurrentUser } from "../redux/action/actionCreator";
+import userEvent from "@testing-library/user-event";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state);
 
-  const [userArrName, setUserArrName] = useState([]);
-  const [userArrPass, setUserArrPass] = useState([]);
-
   const [checked, setChecked] = useState(true);
+  const [currentUser, setCurrentUser] = useState({});
 
   const [inputName, setInputName] = useState("");
   const [inputPass, setInputPass] = useState("");
-  const [validName, setValidName] = useState(5);
-  const [validPass, setValidPass] = useState(5);
-
-  useEffect(() => {
-    for (const user in users) {
-      setUserArrName((prevUserName) => [...prevUserName, users[user].name]);
-      setUserArrPass((prevUserPass) => [...prevUserPass, users[user].password]);
-    }
-  }, [users]);
-
-  useEffect(() => {
-    if (validPass === true && validName === true) {
-      navigate("/content");
-    } else if (validPass === false || validName === false) {
-      navigate("/error");
-    }
-  }, [validPass]);
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setInputName(localStorage.getItem("user"));
       setInputPass(localStorage.getItem("password"));
-      checkValidName();
-      checkValidPass();
-      dispatchCurrentUser();
+      checkValidity();
+
+      navigate("/content");
     }
   }, []);
 
-  const checkValidName = () => {
-    for (const name of userArrName) {
-      if (name == inputName) {
-        if (checked) {
-          localStorage.setItem("user", name);
-        }
-        return setValidName(true);
-      } else {
-        setValidName(false);
+  // useEffect(()=>{
+  //   dispatch(getCurrentUser(currentUser.image));
+  // }, [currentUser])
+
+  const checkValidity = () => {
+    const currentUser = Object.values(users).find(
+      (user) => user.name === inputName && user.password === inputPass
+    );
+    if (currentUser) {
+      if (checked) {
+        localStorage.setItem("user", currentUser.name);
+        localStorage.setItem("password", currentUser.password);
       }
+      
+      // setCurrentUser(currentUser);
+      dispatch(getCurrentUser(currentUser.image));
+      navigate("/content");
+    } else {
+      navigate("/error");
     }
   };
 
-  const checkValidPass = () => {
-    for (const pass of userArrPass) {
-      if (pass == inputPass) {
-        if (checked) {
-          localStorage.setItem("password", pass);
-        }
-        return setValidPass(true);
-      } else {
-        setValidPass(false);
-      }
-    }
-  };
-
-  const dispatchCurrentUser = () => {
-    for (const key in users) {
-      if (users[key].password == inputPass && users[key].name == inputName) {
-        dispatch(getCurrentUser(users[key].image));
-      }
-    }
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    checkValidity();
   };
 
   return (
@@ -96,6 +71,7 @@ const LoginPage = () => {
           remember: true,
         }}
         autoComplete="off"
+        onSubmit={handleFormSubmit}
       >
         <h4>Autentification</h4>
         <hr />
@@ -128,7 +104,7 @@ const LoginPage = () => {
           ]}
         >
           <Input.Password
-           placeholder={inputPass}
+            placeholder={inputPass}
             onChange={(e) => {
               setInputPass(e.target.value);
             }}
@@ -156,10 +132,8 @@ const LoginPage = () => {
           <Button
             type="primary"
             htmlType="submit"
-            onClick={() => {
-              checkValidName();
-              checkValidPass();
-              dispatchCurrentUser();
+            onClick={(e) => {
+              handleFormSubmit(e);
             }}
           >
             Log in

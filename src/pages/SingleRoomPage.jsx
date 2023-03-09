@@ -16,13 +16,7 @@ const SingleRoomPage = () => {
 
   const navigate = useNavigate();
 
-  // const { currentUser } = useSelector((state) => state);
-  // useEffect(() => {
-  //   if (currentUser == "") {
-  //     navigate("/");
-  //   }
-  // }, [])
-  
+ 
   rooms.forEach((el) => {
     if (el.id == id) {
       currentRoom = el;

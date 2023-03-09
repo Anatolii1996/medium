@@ -8,18 +8,6 @@ import { Link } from 'react-router-dom';
 const MainPage = () => {
   const rooms = useSelector(getRoomsState);
 
-  useEffect(() => {
-    const roomsArr = Object.entries(rooms)
-      .map(([key, value]) => ({
-        key,
-        ...value,
-      }))
-      .sort((a, b) => {
-        return a.number - b.number;
-      });
-
-  }, [rooms]);
-
   const [isChecked, setIsChecked] = useState(false);
 
   const guestsOptions = useMemo(
