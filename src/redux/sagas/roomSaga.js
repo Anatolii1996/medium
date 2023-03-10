@@ -28,11 +28,12 @@ function* updateRoom(id, updatedFields) {
   }
 
   function* checkInRoomSaga({ payload }) {
+    console.log("checkInRoomSaga");
     const { id, username } = payload;
     const updatedFields = {
       checkInDate: new Date(),
       isCheckedIn: true,
-      username,
+     guest: username,
     };
     yield updateRoom(id, updatedFields) ;
   }
