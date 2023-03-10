@@ -1,13 +1,13 @@
 import { all, call } from "@redux-saga/core/effects";
 import watchRoomSaga from "./roomSaga";
-import watchUserSaga from "./userSaga";
+// import watchUserSaga from "./userSaga";
 // import { getRooms } from "../../api";
 // import { getRoomsFirebase } from "../../firebase";
 // import { setRoomsData } from "../action/actionCreator";
 
 const sagasList = [
   watchRoomSaga,
-  watchUserSaga
+  // watchUserSaga
 ];
 
 export default function* rootSaga() {
