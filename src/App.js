@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
-import LoginPage from './pages/LoginPage';
+import LoginPage from "./pages/LoginPage";
 import { Routes, Route, useNavigate } from "react-router";
 import Header from './components/Header';
 import MainPage from './pages/MainPage';
-import ErrorPage from './pages/ErrorPage';
+import ErrorPage from "./pages/ErrorPage"
 import SingleRoomPage from './pages/SingleRoomPage';
 
 // import axios from 'axios';

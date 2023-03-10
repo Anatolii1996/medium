@@ -44,7 +44,6 @@ const MainPage = () => {
   const handleTableChange = (pagination, filters, sorter) => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
-    console.log(sortedInfo);
   };
   const columns = [
     {

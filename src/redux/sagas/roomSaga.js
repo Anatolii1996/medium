@@ -13,7 +13,6 @@ function* updateRoom(id, updatedFields) {
 }
 
 function* checkOutRoomSaga({ payload }) {
-  console.log("checkOutRoomSaga");
   const { id } = payload;
   const updatedFields = {
     checkInDate: null,
@@ -25,7 +24,6 @@ function* checkOutRoomSaga({ payload }) {
 }
 
 function* checkInRoomSaga({ payload }) {
-  console.log("checkInRoomSaga");
   const { id, username, checkOutDate  } = payload;
   const updatedFields = {
     checkInDate: moment().format('YYYY-MM-DD'),
