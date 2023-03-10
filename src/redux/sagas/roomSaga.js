@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { GET_ROOMS, CHECK_OUT_ROOM } from '../constants';
+import { GET_ROOMS, CHECK_OUT_ROOM, CHECK_IN_ROOM } from '../constants';
 import { getRooms, updateRoomGuest } from '../action/ActionCreator';
 import { getRoomsFirebase, updateRoomFirestore } from '../../firebase';
 
@@ -23,11 +23,22 @@ function* updateRoom(id, updatedFields) {
       isCheckedIn: false,
       guest: '',
     };
-    yield call(updateRoom, id, updatedFields);
+    yield updateRoom(id, updatedFields) ;
+  }
+
+  function* checkInRoomSaga({ payload }) {
+    const { id, username } = payload;
+    const updatedFields = {
+      checkInDate: new Date(),
+      isCheckedIn: true,
+      username,
+    };
+    yield updateRoom(id, updatedFields) ;
   }
 
 export default function* watchRoomSaga() {
     yield takeEvery(GET_ROOMS, getRoomsSaga);
+    yield takeEvery(CHECK_IN_ROOM, checkInRoomSaga);
     yield takeEvery(CHECK_OUT_ROOM, checkOutRoomSaga);
 }
 
