@@ -1,11 +1,14 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Button, Modal,  Form, Input } from "antd";
+import { Button, Modal,  Form, Input, DatePicker } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 import { checkInRoom } from "../redux/action/actionCreator";
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 const CheckIn = ({ currentRoom }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const disabledDate = (current) => current && current < moment().endOf('day');
 
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -29,16 +32,17 @@ const CheckIn = ({ currentRoom }) => {
         Check in
       </Button>
       <Modal
-        title={`Do you really want to check in the room ${currentRoom.number} ?`}
+        title={`CHECK IN`}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        okText="Check in"
       >
-        <p>Please enter your name</p>
-        <Form form={form}
+        <hr/>
+        <Form form={form} layout="vertical"
           name="basic"
           labelCol={{
-            span: 4,
+            span: 12,
           }}
           wrapperCol={{
             span: 20,
@@ -52,7 +56,7 @@ const CheckIn = ({ currentRoom }) => {
           autoComplete="off"
         >
           <Form.Item
-            label="Username"
+            label="Please, enter the guest`s name:"
             name="username"
             rules={[
               {
@@ -61,9 +65,14 @@ const CheckIn = ({ currentRoom }) => {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="Guest's Name" prefix={<UserOutlined />}/>
           </Form.Item>
-
+          <Form.Item
+            name="checkOutDate"
+            label="Please, enter the approximate date of guest checkout:"
+          >
+            <DatePicker disabledDate={disabledDate} />
+          </Form.Item>
         </Form>
       </Modal>
     </>
