@@ -1,11 +1,17 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import './App.scss';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getRooms, getUsers } from './redux/action/actionCreator';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from './firebase';
+import LoginPage from './pages/LoginPage';
+import { Routes, Route, useNavigate } from "react-router";
+import Header from './components/Header';
+import MainPage from './pages/MainPage';
+import ErrorPage from './pages/ErrorPage';
+import SingleRoomPage from './pages/SingleRoomPage';
 
 // import axios from 'axios';
 // import {   doc, setDoc } from 'firebase/firestore';
@@ -36,9 +42,9 @@ const [rooms, SetRooms] = useState([]);
   }, []); */}
 
   // </>
-const [rooms, setRooms]=useState([])
-const [users, setUsers]=useState([]);
-const dispatch = useDispatch();
+  const [rooms, setRooms] = useState([]);
+  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const q = query(collection(db, "Rooms"));
@@ -49,7 +55,7 @@ const dispatch = useDispatch();
       })
       setRooms(roomsArr);
     })
-    
+
     return () => unsubscribe()
   }, []);
 
@@ -62,10 +68,10 @@ const dispatch = useDispatch();
       })
       setUsers(usersArr);
     })
-    
+
     return () => unsubscribe()
   }, []);
-   
+
   useEffect(() => {
     dispatch(getRooms(rooms))
   }, [rooms]);
@@ -74,16 +80,37 @@ const dispatch = useDispatch();
     dispatch(getUsers(users))
   }, [users]);
 
-  return (
-    <div className="App">
+  const navigate = useNavigate();
 
-      {/*Вызов функции записи данных в firebase
-       <button onClick={()=>{
-        createAccount()
-      }}>Получить данные</button>*/}
-      
-      {/* {console.log(rooms)}  */}
-    </div>
+  const { currentUser } = useSelector((state) => state);
+  useEffect(() => {
+    if (currentUser == "") {
+      navigate("/");
+    }
+  }, [])
+
+  return (
+
+    // {/*Вызов функции записи данных в firebase
+    //    <button onClick={()=>{
+    //     createAccount()
+    //   }}>Получить данные</button>*/}
+    <Routes>
+
+      <Route path="/" element={<LoginPage />}></Route>
+      <Route path='/content' element={<Header />}>
+        <Route path='/content' element={<MainPage />}></Route>
+        <Route path='/content/room/:id' element={<SingleRoomPage />}></Route>
+
+      </Route>
+      <Route path='/error' element={<ErrorPage />}></Route>
+    </Routes>
+
+
+
+
+
+
   );
 }
 
