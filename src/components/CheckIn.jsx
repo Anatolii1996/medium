@@ -1,13 +1,22 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Button, Modal, Checkbox, Form, Input } from "antd";
+import { Button, Modal,  Form, Input } from "antd";
+import { checkInRoom } from "../redux/action/actionCreator";
+import { useDispatch } from 'react-redux';
 
 const CheckIn = ({ currentRoom }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
+  const handleOk = async  () => {
+    const values = await form.validateFields();
+    form.resetFields();
+    await dispatch(checkInRoom(currentRoom.id, values));
     setIsModalOpen(false);
   };
   const handleCancel = () => {
@@ -26,7 +35,7 @@ const CheckIn = ({ currentRoom }) => {
         onCancel={handleCancel}
       >
         <p>Please enter your name</p>
-        <Form
+        <Form form={form}
           name="basic"
           labelCol={{
             span: 4,

@@ -18,7 +18,6 @@ const MainPage = () => {
       const currentUser = Object.values(users).find(
         (user) => user.name === localUser
       );
-      // console.log(currentUser);
       setCurrentUser(currentUser);
       if (currentUser && currentUser.image) {
         dispatch(getCurrentUser(currentUser.image));
