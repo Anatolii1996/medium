@@ -42,7 +42,7 @@ const CheckIn = ({ currentRoom }) => {
         <Form form={form} layout="vertical"
           name="basic"
           labelCol={{
-            span: 12,
+            span: 18,
           }}
           wrapperCol={{
             span: 20,

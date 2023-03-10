@@ -24,11 +24,15 @@ const CheckOut = ({ currentRoom }) => {
         Check out
       </Button>
       <Modal
-        title={`Do you really want to check out the room ${currentRoom.number} ?`}
+        title={`Check Out`}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-      ></Modal>
+        okText="Confirm"
+      >
+        <hr/>
+        <p>Do you сonfirm to check out Room {currentRoom.number} ?</p>
+      </Modal>
     </>
   );
 };
