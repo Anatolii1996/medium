@@ -13,8 +13,8 @@ const LoginPage = () => {
   const [checked, setChecked] = useState(true);
   // const [currentUser, setCurrentUser] = useState({});
 
-  const [inputName, setInputName] = useState("");
-  const [inputPass, setInputPass] = useState("");
+  const [inputName, setInputName] = useState("user1");
+  const [inputPass, setInputPass] = useState("pass1");
 
   useEffect(() => {
     if (localStorage.getItem("user")) {

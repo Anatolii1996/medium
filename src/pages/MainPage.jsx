@@ -112,6 +112,7 @@ const MainPage = () => {
     {
       title: "",
       dataIndex: "",
+      width: "17%",
       render: (text, record) => (
         <Link to={`/content/room/${record.id}`}>
           <button className="btn btn-primary">More information</button>

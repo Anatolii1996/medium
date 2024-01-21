@@ -53,6 +53,7 @@ body {
   .main_header_wrap {
     padding-bottom: 20px;
     display: flex;
+    justify-content: space-evenly;
     div {
       margin-right: 25px;
       display: flex;
@@ -117,6 +118,28 @@ body {
     }
   }
 }
-.footer_description{
+.footer_description {
   margin-top: 20px;
+}
+table {
+  background: #ffff;
+}
+
+@media (max-width: 1000px) {
+  .form-wrapper form {
+    width: 50%;
+  }
+  h4 {
+    font-size: calc(1rem + 0.3vw);
+  }
+  :where(.css-dev-only-do-not-override-10ed4xt).ant-checkbox-wrapper {
+    align-items: center !important;
+    padding: 0 15px;
+  }
+  .single_page .single_center{
+    flex-direction: column;
+    .ant-carousel, .feature{
+      width: 90%;
+    }
+  }
 }
